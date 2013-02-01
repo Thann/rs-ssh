@@ -34,6 +34,10 @@
       } else if (!bb.attr('id')) {
         address = 'td[data-column_name="Public IP"] a';
         host = bb.closest('tr').find(address).text().trim();
+        if (host === "") {
+          address = 'td[data-column_name="Public DNS"] a';
+          host = bb.closest('tr').find(address).text().trim();
+        }
       } else {
         return;
       }
