@@ -14,17 +14,7 @@ replace_ssh_event_handler = () ->
   if !buttons.length then return
   buttons.each (i) ->
     bb = __(this)
-    index = bb.attr('href').indexOf('ip_address')
-    ##Giving the <a hrefs>'s unique classes would make this if-block simpler.
-    if index > 0
-      host = bb.attr('href').substring(index+11)
-    else if !bb.attr('id')
-      address = 'td[data-column_name="Public IP"] a'
-      host = bb.closest('tr').find(address).text().trim()
-      if host == ""
-        address = 'td[data-column_name="Public DNS"] a'
-        host = bb.closest('tr').find(address).text().trim()
-    else return
+    host = bb.attr('data-ssh-ip')
     bb.attr('href', "ssh://#{username}@#{host}")
     bb.removeAttr 'data-popup'
     bb.removeAttr 'data-behaves'

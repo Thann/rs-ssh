@@ -26,21 +26,9 @@
       return;
     }
     return buttons.each(function(i) {
-      var bb, host, index;
+      var bb, host;
       bb = __(this);
-      index = bb.attr('href').indexOf('ip_address');
-      if (index > 0) {
-        host = bb.attr('href').substring(index + 11);
-      } else if (!bb.attr('id')) {
-        address = 'td[data-column_name="Public IP"] a';
-        host = bb.closest('tr').find(address).text().trim();
-        if (host === "") {
-          address = 'td[data-column_name="Public DNS"] a';
-          host = bb.closest('tr').find(address).text().trim();
-        }
-      } else {
-        return;
-      }
+      host = bb.attr('data-ssh-ip');
       bb.attr('href', "ssh://" + username + "@" + host);
       bb.removeAttr('data-popup');
       return bb.removeAttr('data-behaves');
